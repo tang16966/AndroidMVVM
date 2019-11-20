@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'org.greenrobot.greendao'
+
+
+android {
+    compileSdkVersion rootProject.ext.android["compileSdkVersion"]
+    buildToolsVersion rootProject.ext.android["buildToolsVersion"]
+    defaultConfig {
+        applicationId rootProject.ext.android["applicationId"]
+        minSdkVersion rootProject.ext.android["minSdkVersion"]
+        targetSdkVersion rootProject.ext.android["targetSdkVersion"]
+        versionCode rootProject.ext.android["versionCode"]
+        versionName rootProject.ext.android["versionName"]
+        testInstrumentationRunner rootProject.ext.android["testInstrumentationRunner"]
+    }
+
+//    applicationVariants.all { variant ->
+//        variant.outputs.all { output ->
+//            if (variant.buildType.name.equals('release')) {
+//                def fileName = "app_${variant.versionName}.apk"
+//                def outFile = output.outputFile
+//                if (outFile != null && outFile.name.endsWith('.apk')) {
+//                    outputFileName = fileName
+//                }
+//            }
+//        }
+//    }
+
+    signingConfigs {
+        release {
+            storeFile file("trs.jks")
+            storePassword "tang153751"
+            keyAlias "dangjian"
+            keyPassword "tang153751"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true // 是否混淆
+            shrinkResources true // 是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+        debug {
+            minifyEnabled false // 是否混淆
+            shrinkResources false // 是否去除无效的资源文件
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+
+    greendao {
+        schemaVersion 1
+        daoPackage 'cache.greendao'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation rootProject.ext.androidDependencies["appcompat"]
+    implementation rootProject.ext.androidDependencies["constraintlayout"]
+    implementation rootProject.ext.androidDependencies["junit"]
+    testImplementation rootProject.ext.androidDependencies["core_ktx"]
+    androidTestImplementation rootProject.ext.androidDependencies["espresso"]
+    androidTestImplementation rootProject.ext.androidDependencies["test_junit"]
+
+//    implementation rootProject.ext.androidDependencies["recyclerview"]
+//    implementation rootProject.ext.androidDependencies["material"]
+    implementation project(path: ':mvvm')
+}
