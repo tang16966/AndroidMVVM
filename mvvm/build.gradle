@@ -85,4 +85,7 @@ dependencies {
     //Google LiveData和ViewModel组件
     api rootProject.ext.dependencies["lifecycle-extensions"]
     annotationProcessor rootProject.ext.dependencies["lifecycle-compiler"]
+
+    api rootProject.ext.dependencies["immersionbar"]
+    api rootProject.ext.dependencies["immersionbarComponents"]
 }

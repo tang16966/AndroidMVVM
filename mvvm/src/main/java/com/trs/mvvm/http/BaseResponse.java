@@ -6,35 +6,35 @@ package com.trs.mvvm.http;
  * Explain : 该类仅供参考，实际业务返回的固定字段, 根据需求来定义，
  */
 public class BaseResponse<T> {
-    private int code;
-    private String message;
-    private T result;
+    private int status;
+    private String msg;
+    private T data;
 
     public int getCode() {
-        return code;
+        return status;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public T getResult() {
-        return result;
-    }
-
-    public void setResult(T result) {
-        this.result = result;
-    }
-
-    public boolean isOk() {
-        return code == 0;
+    public void setStatus(int status) {
+        this.status = status;
     }
 
     public String getMessage() {
-        return message;
+        return msg;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMsg(String msg) {
+        this.msg = msg;
+    }
+
+    public T getResult() {
+        return data;
+    }
+
+    public void setData(T data) {
+        this.data = data;
+    }
+
+    public boolean isOk() {
+        return status == 200;
     }
 }

@@ -11,7 +11,7 @@ import okhttp3.Response;
 /**
  * @author TRS
  * Create time : 2019/11/20
- * Explain :
+ * Explain : 添加请求头
  */
 public class BaseInterceptor implements Interceptor {
     private Map<String, String> headers;

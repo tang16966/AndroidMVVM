@@ -35,7 +35,7 @@ android {
         release {
             storeFile file("trs.jks")
             storePassword "tang153751"
-            keyAlias "dangjian"
+            keyAlias "android"
             keyPassword "tang153751"
         }
     }
@@ -59,6 +59,10 @@ android {
         schemaVersion 1
         daoPackage 'cache.greendao'
     }
+
+    dataBinding {
+        enabled = true
+    }
 }
 
 dependencies {
@@ -71,7 +75,7 @@ dependencies {
     androidTestImplementation rootProject.ext.androidDependencies["espresso"]
     androidTestImplementation rootProject.ext.androidDependencies["test_junit"]
 
-//    implementation rootProject.ext.androidDependencies["recyclerview"]
-//    implementation rootProject.ext.androidDependencies["material"]
+    implementation rootProject.ext.dependencies["greendao"]
     implementation project(path: ':mvvm')
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.0-beta-4'
 }
